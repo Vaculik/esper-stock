@@ -3,6 +3,7 @@ package cz.muni.fi;
 import cz.muni.fi.event.Stock;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -19,14 +20,14 @@ public final class EventStreamGenerator {
     }
 
 
-    public static LinkedList<Object> generateStockStream(int numOfEvents, double minPrice, double maxPrice, int changeIndex) {
+    public static List<Object> generateStockStream(int numOfEvents, double minPrice, double maxPrice, int changeIndex) {
         return generateStockStream(getDefaultLabel(), numOfEvents, minPrice, maxPrice, changeIndex);
     }
 
 
-    public static LinkedList<Object> generateStockStream(String stockLabel, int numOfEvents,
+    public static List<Object> generateStockStream(String stockLabel, int numOfEvents,
                                                          double minPrice, double maxPrice, int changeIndex) {
-        LinkedList<Object> eventStream = new LinkedList<Object>();
+        List<Object> eventStream = new LinkedList<Object>();
         double price = minPrice + (maxPrice - minPrice) * random.nextDouble();
         double priceChange = random.nextDouble() * changeIndex;
         int signOfChange = random.nextBoolean() ? 1 : -1;

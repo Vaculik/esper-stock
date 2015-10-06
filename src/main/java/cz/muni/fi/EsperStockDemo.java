@@ -3,6 +3,7 @@ package cz.muni.fi;
 import cz.muni.fi.event.Stock;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Hello world!
@@ -65,8 +66,8 @@ public class EsperStockDemo
             return;
         }
 
-        LinkedList stream1 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
-        LinkedList stream2 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
+        List<Object> stream1 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
+        List<Object> stream2 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
 
         for (Object stock : stream1) {
             Stock s = (Stock) stock;
