@@ -2,6 +2,7 @@ package cz.muni.fi;
 
 import cz.muni.fi.event.Stock;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -66,17 +67,17 @@ public class EsperStockDemo
             return;
         }
 
-        List<Object> stream1 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
-        List<Object> stream2 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
-
-        for (Object stock : stream1) {
-            Stock s = (Stock) stock;
-            System.out.println(s.toString());
-        }
-        for (Object stock : stream2) {
-            Stock s = (Stock) stock;
-            System.out.println(s.toString());
-        }
+//        List<Object> stream1 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
+//        List<Object> stream2 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
+//
+//        for (Object stock : stream1) {
+//            Stock s = (Stock) stock;
+//            System.out.println(s.toString());
+//        }
+//        for (Object stock : stream2) {
+//            Stock s = (Stock) stock;
+//            System.out.println(s.toString());
+//        }
 
     }
 
