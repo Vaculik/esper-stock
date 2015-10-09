@@ -67,9 +67,17 @@ public class EsperStockDemo
             return;
         }
 
-//        List<Object> stream1 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
-//        List<Object> stream2 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
-//
+        List<Object> stream1 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
+        List<Object> stream2 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
+
+        StreamsContainer streams = new StreamsContainer();
+        streams.addStream(stream1);
+        streams.addStream(stream2);
+
+        while (streams.hasNextEvent()) {
+            System.out.println(streams.getNextEvent());
+        }
+
 //        for (Object stock : stream1) {
 //            Stock s = (Stock) stock;
 //            System.out.println(s.toString());
