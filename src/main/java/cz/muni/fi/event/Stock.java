@@ -5,23 +5,46 @@ package cz.muni.fi.event;
  */
 public class Stock {
     private double price;
-    private String sign;
+    private String label;
 
-    public Stock(double price, String sign) {
+    public Stock(double price, String label) {
         this.price = price;
-        this.sign = sign;
+        this.label = label;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public String getSign() {
-        return sign;
+    public String getLabel() {
+        return label;
     }
 
     @Override
     public String toString() {
-        return "Stock: sign=" + sign + "  price=" + price;
+        return "Stock: label=" + label + "  price=" + price;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 1;
+        hash = hash * 13 + (int) Math.round(price * 100);
+        hash = hash * 11 + label.hashCode();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Stock)){
+            return false;
+        }
+        Stock s = (Stock) obj;
+        if ( Math.abs(s.getPrice() - price) > 0.001 ) {
+            return false;
+        }
+        if (!s.getLabel().equals(label)) {
+            return false;
+        }
+        return true;
     }
 }
