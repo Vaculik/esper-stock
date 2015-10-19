@@ -1,5 +1,9 @@
 package cz.muni.fi;
 
+import com.espertech.esper.client.Configuration;
+import com.espertech.esper.client.EPRuntime;
+import com.espertech.esper.client.EPServiceProvider;
+import com.espertech.esper.client.EPServiceProviderManager;
 import cz.muni.fi.event.Stock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,19 +19,34 @@ public class StockMonitor {
 
     private static final Logger logger = LoggerFactory.getLogger(StockMonitor.class);
     private static final long DEFAULT_DELAY = 50L;
+    private StreamsContainer streamsContainer = new StreamsContainer();
+    private EPServiceProvider serviceProvider;
 
 
     public StockMonitor() {
-
+        Configuration config = new Configuration();
+        config.addEventType("Stock", Stock.class);
+        serviceProvider = EPServiceProviderManager.getProvider(StockMonitor.class.getName(), config);
+        setStatements();
     }
 
     public void addStream(List<Object> stream) {
-
+        streamsContainer.addStream(stream);
     }
 
     public void start() {
+        EPRuntime runtime = serviceProvider.getEPRuntime();
 
+        while(streamsContainer.hasNextEvent()) {
+            runtime.sendEvent(streamsContainer.getNextEvent());
+            try {
+                Thread.sleep(DEFAULT_DELAY);
+            } catch (InterruptedException e) {
+                logger.warn("Interrupted when was processing event streams", e);
+            }
+        }
     }
 
-
+    private void setStatements() {
+    }
 }
