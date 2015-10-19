@@ -67,8 +67,8 @@ public class EsperStockDemo
             return;
         }
 
-        List<Object> stream1 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
-        List<Object> stream2 = EventStreamGenerator.generateStockStream(numOfStocks, minPrice, maxPrice, changeIndex);
+        List<Object> stream1 = EventStreamGenerator.generateStockStream(numOfStocks, changeIndex);
+        List<Object> stream2 = EventStreamGenerator.generateStockStream(numOfStocks, changeIndex);
 
         StreamsContainer streams = new StreamsContainer();
         streams.addStream(stream1);
