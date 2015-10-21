@@ -1,10 +1,12 @@
 package cz.muni.fi;
 
-import com.espertech.esper.client.Configuration;
-import com.espertech.esper.client.EPRuntime;
-import com.espertech.esper.client.EPServiceProvider;
-import com.espertech.esper.client.EPServiceProviderManager;
+import com.espertech.esper.client.*;
+import com.espertech.esper.client.scopetest.SupportUpdateListener;
 import cz.muni.fi.event.Stock;
+import cz.muni.fi.statement.AlertCausalityListener;
+import cz.muni.fi.statement.AlertCausalityStatement;
+import cz.muni.fi.statement.StockAlertListener;
+import cz.muni.fi.statement.StockAlertStatement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,5 +50,7 @@ public class StockMonitor {
     }
 
     private void setStatements() {
+        new StockAlertStatement(serviceProvider).addListener(new StockAlertListener());
+        new AlertCausalityStatement(serviceProvider).addListener(new AlertCausalityListener());
     }
 }

@@ -14,7 +14,7 @@ public class EsperStockDemo
 {
     public static void main( String[] args )
     {
-        int numOfStocks = 100;
+        int numOfStocks = 50;
         int changeIndex = 10;
 
         if (args.length == 2) {
@@ -41,14 +41,15 @@ public class EsperStockDemo
 
         List<Object> stream1 = EventStreamGenerator.generateStockStream(numOfStocks, changeIndex);
         List<Object> stream2 = EventStreamGenerator.generateStockStream(numOfStocks, changeIndex);
+//        List<Object> stream3 = EventStreamGenerator.generateStockStream(numOfStocks, changeIndex);
+//        List<Object> stream4 = EventStreamGenerator.generateStockStream(numOfStocks, changeIndex);
 
-        StreamsContainer streams = new StreamsContainer();
-        streams.addStream(stream1);
-        streams.addStream(stream2);
-
-        while (streams.hasNextEvent()) {
-            System.out.println(streams.getNextEvent());
-        }
+        StockMonitor monitor = new StockMonitor();
+        monitor.addStream(stream1);
+        monitor.addStream(stream2);
+//        monitor.addStream(stream3);
+//        monitor.addStream(stream4);
+        monitor.start();
 
 //        for (Object stock : stream1) {
 //            Stock s = (Stock) stock;

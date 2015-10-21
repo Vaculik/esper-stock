@@ -52,7 +52,7 @@ public final class EventStreamGenerator {
         double priceChange = random.nextDouble() * changeIndex;
         int signOfChange = random.nextBoolean() ? 1 : -1;
 
-        eventStream.add(new Stock(roundPrice(price), stockLabel));
+        eventStream.add(new Stock(roundDoubleTwoDecimal(price), stockLabel));
 
         for(int i = 1; i < numOfEvents; i++) {
             signOfChange *= random.nextInt(4) == 0 ? -1 : 1;
@@ -64,13 +64,14 @@ public final class EventStreamGenerator {
                 price += 2 * priceChange * signOfChange;
             }
 
-            eventStream.add(new Stock(roundPrice(price), stockLabel));
+            eventStream.add(new Stock(roundDoubleTwoDecimal(price), stockLabel));
         }
 
         return eventStream;
     }
 
-    private static double roundPrice(double value) {
+
+    public static double roundDoubleTwoDecimal(double value) {
         value = Math.round(value * 100);
         return value / 100;
     }
