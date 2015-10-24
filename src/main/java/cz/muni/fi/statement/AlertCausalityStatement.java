@@ -4,6 +4,8 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.UpdateListener;
 
+import java.util.Iterator;
+
 /**
  * Created by vaculik on 21.10.15.
  */
@@ -21,5 +23,9 @@ public class AlertCausalityStatement {
 
     public void addListener(UpdateListener listener) {
         statement.addListener(listener);
+    }
+
+    public Iterator<UpdateListener> getAllListeners() {
+        return statement.getUpdateListeners();
     }
 }

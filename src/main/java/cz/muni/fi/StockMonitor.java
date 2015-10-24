@@ -1,17 +1,11 @@
 package cz.muni.fi;
 
 import com.espertech.esper.client.*;
-import com.espertech.esper.client.scopetest.SupportUpdateListener;
 import cz.muni.fi.event.Stock;
-import cz.muni.fi.statement.AlertCausalityListener;
-import cz.muni.fi.statement.AlertCausalityStatement;
-import cz.muni.fi.statement.StockAlertListener;
-import cz.muni.fi.statement.StockAlertStatement;
+import cz.muni.fi.statement.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,13 +17,22 @@ public class StockMonitor {
     private static final long DEFAULT_DELAY = 50L;
     private StreamsContainer streamsContainer = new StreamsContainer();
     private EPServiceProvider serviceProvider;
+    private final ListenerResults stockAlertResults;
+    private final ListenerResults alertCausalityResults;
 
 
     public StockMonitor() {
         Configuration config = new Configuration();
         config.addEventType("Stock", Stock.class);
         serviceProvider = EPServiceProviderManager.getProvider(StockMonitor.class.getName(), config);
-        setStatements();
+
+        StockAlertStatement stockAlertStatement = new StockAlertStatement(serviceProvider);
+        stockAlertResults = new ListenerResults();
+        stockAlertStatement.addListener(new StockAlertListener(stockAlertResults));
+
+        AlertCausalityStatement alertCausalityStatement = new AlertCausalityStatement(serviceProvider);
+        alertCausalityResults = new ListenerResults();
+        alertCausalityStatement.addListener(new AlertCausalityListener(alertCausalityResults));
     }
 
     public void addStream(List<Object> stream) {
@@ -37,20 +40,35 @@ public class StockMonitor {
     }
 
     public void start() {
+        start(DEFAULT_DELAY);
+    }
+
+    public void start(long delay) {
         EPRuntime runtime = serviceProvider.getEPRuntime();
 
         while(streamsContainer.hasNextEvent()) {
+//            Stock s = (Stock) streamsContainer.getNextEvent();
+//            System.out.println(s);
+//            runtime.sendEvent(s);
             runtime.sendEvent(streamsContainer.getNextEvent());
             try {
-                Thread.sleep(DEFAULT_DELAY);
+                Thread.sleep(delay);
             } catch (InterruptedException e) {
                 logger.warn("Interrupted when was processing event streams", e);
             }
+//            System.out.println("RESULT: " + stockAlertResults.getNumOfResults());
         }
     }
 
-    private void setStatements() {
-        new StockAlertStatement(serviceProvider).addListener(new StockAlertListener());
-        new AlertCausalityStatement(serviceProvider).addListener(new AlertCausalityListener());
+    public ListenerResults getStockAlertResults() {
+        return stockAlertResults;
     }
-}
+
+    public ListenerResults getAlertCausalityResults() {
+        return alertCausalityResults;
+    }
+
+    public void closeServiceProvider() {
+        serviceProvider.destroy();
+    }
+ }

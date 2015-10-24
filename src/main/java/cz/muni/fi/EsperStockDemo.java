@@ -50,6 +50,7 @@ public class EsperStockDemo
 //        monitor.addStream(stream3);
 //        monitor.addStream(stream4);
         monitor.start();
+        System.out.println("FINAL RESULT: " + monitor.getStockAlertResults().getNumOfResults());
 
 //        for (Object stock : stream1) {
 //            Stock s = (Stock) stock;

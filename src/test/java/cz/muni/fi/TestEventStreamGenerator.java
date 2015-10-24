@@ -31,7 +31,7 @@ public class TestEventStreamGenerator {
     }
 
     @Test
-    public void illegalNumOfEventsGenerateStream() {
+    public void illegalNumOfEvents() {
         thrown.expect(IllegalArgumentException.class);
         EventStreamGenerator.generateStockStream(stockLabel, -10, changeIndex);
 
@@ -46,7 +46,7 @@ public class TestEventStreamGenerator {
     }
 
     @Test
-    public void illegalChangeIndexGenerateStream() {
+    public void illegalChangeIndex() {
         thrown.expect(IllegalArgumentException.class);
         EventStreamGenerator.generateStockStream(stockLabel, numOfEvents, -1);
 
@@ -61,7 +61,7 @@ public class TestEventStreamGenerator {
     }
 
     @Test
-    public void validParametersGenerateStream() {
+    public void validParameters() {
 
         // Test marginal valid values of parameters, should not throw an exception
         EventStreamGenerator.generateStockStream(stockLabel, 1, 0);
@@ -69,7 +69,7 @@ public class TestEventStreamGenerator {
     }
 
     @Test
-    public void rightNumOfEventsGenerateStream() {
+    public void rightNumOfEvents() {
         List<Object> stream = EventStreamGenerator.generateStockStream(stockLabel, numOfEvents, changeIndex);
         assertEquals(numOfEvents, stream.size());
 
@@ -78,7 +78,7 @@ public class TestEventStreamGenerator {
     }
 
     @Test
-    public void rightStockLabelGenerateStream() {
+    public void rightStockLabel() {
         List<Object> stream = EventStreamGenerator.generateStockStream(stockLabel, numOfEvents, changeIndex);
         for (Object o : stream) {
             Stock s = (Stock) o;
@@ -87,7 +87,7 @@ public class TestEventStreamGenerator {
     }
 
     @Test
-    public void priceIntervalGenerateStream() {
+    public void priceInterval() {
         List<Object> stream = EventStreamGenerator.generateStockStream(stockLabel, numOfEvents, changeIndex);
         for (Object o : stream) {
             Stock s = (Stock) o;
@@ -103,7 +103,7 @@ public class TestEventStreamGenerator {
     }
 
     @Test
-    public void differentDefaultLabelsGenerateStream() {
+    public void differentDefaultLabels() {
         List<Object> stream1 = EventStreamGenerator.generateStockStream(1, changeIndex);
         List<Object> stream2 = EventStreamGenerator.generateStockStream(1, changeIndex);
         Stock s1 = (Stock) stream1.get(0);

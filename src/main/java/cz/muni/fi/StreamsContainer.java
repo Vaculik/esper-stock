@@ -44,6 +44,7 @@ class StreamsContainer {
             logger.warn(msg);
             throw new NoSuchElementException(msg);
         }
+
         if (iterationIndex >= streams.size()) {
             iterationIndex = 0;
         }
