@@ -24,8 +24,4 @@ public class AlertCausalityStatement {
     public void addListener(UpdateListener listener) {
         statement.addListener(listener);
     }
-
-    public Iterator<UpdateListener> getAllListeners() {
-        return statement.getUpdateListeners();
-    }
 }

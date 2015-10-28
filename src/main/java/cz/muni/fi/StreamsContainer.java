@@ -17,7 +17,7 @@ class StreamsContainer {
     private int iterationIndex = 0;
 
     public StreamsContainer() {
-        streams = new ArrayList<List<Object>>();
+        streams = new ArrayList<>();
     }
 
     public void addStream(List<Object> stream) {

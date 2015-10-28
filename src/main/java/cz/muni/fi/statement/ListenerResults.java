@@ -1,5 +1,8 @@
 package cz.muni.fi.statement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,11 +12,12 @@ import java.util.Set;
  */
 public class ListenerResults {
 
+    private static final Logger logger = LoggerFactory.getLogger(ListenerResults.class);
     private Set<Object> results = new HashSet<>();
 
     public void addResult(Object r) {
+        logger.debug("Add result, actual result size is " + results.size() + ".");
         results.add(r);
-//        System.out.println("ADD RESULT: numOfResults " + results.size());
     }
 
     public Set<Object> getAllResults() {

@@ -5,14 +5,11 @@ import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.UpdateListener;
 import cz.muni.fi.EventStreamGenerator;
 
-import java.util.Iterator;
-
 /**
  * Created by vaculik on 21.10.15.
  */
 public class StockAlertStatement {
     private EPStatement statement;
-    private UpdateListener lastAddedListener;
 
     public StockAlertStatement(EPServiceProvider provider) {
         double range = (EventStreamGenerator.MAX_PRICE - EventStreamGenerator.MIN_PRICE) / 10;
@@ -27,10 +24,5 @@ public class StockAlertStatement {
 
     public void addListener(UpdateListener listener) {
         statement.addListener(listener);
-        lastAddedListener = listener;
-    }
-
-    public UpdateListener getLastAddedListener() {
-        return lastAddedListener;
     }
 }

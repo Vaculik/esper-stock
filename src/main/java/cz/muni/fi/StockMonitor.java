@@ -14,7 +14,7 @@ import java.util.List;
 public class StockMonitor {
 
     private static final Logger logger = LoggerFactory.getLogger(StockMonitor.class);
-    private static final long DEFAULT_DELAY = 50L;
+    private static final long DEFAULT_DELAY = 100L;
     private StreamsContainer streamsContainer = new StreamsContainer();
     private EPServiceProvider serviceProvider;
     private final ListenerResults stockAlertResults;
@@ -26,16 +26,19 @@ public class StockMonitor {
         config.addEventType("Stock", Stock.class);
         serviceProvider = EPServiceProviderManager.getProvider(StockMonitor.class.getName(), config);
 
+        logger.debug("Create StockAlertStatement and add appropriate listeners.");
         StockAlertStatement stockAlertStatement = new StockAlertStatement(serviceProvider);
         stockAlertResults = new ListenerResults();
         stockAlertStatement.addListener(new StockAlertListener(stockAlertResults));
 
+        logger.debug("Create AlertCausalityStatement and add appropriate listeners.");
         AlertCausalityStatement alertCausalityStatement = new AlertCausalityStatement(serviceProvider);
         alertCausalityResults = new ListenerResults();
         alertCausalityStatement.addListener(new AlertCausalityListener(alertCausalityResults));
     }
 
     public void addStream(List<Object> stream) {
+        logger.debug("Add stream of size " + stream.size() + ".");
         streamsContainer.addStream(stream);
     }
 
@@ -44,20 +47,21 @@ public class StockMonitor {
     }
 
     public void start(long delay) {
+        logger.debug("Get EPRuntime and start processing.");
         EPRuntime runtime = serviceProvider.getEPRuntime();
 
         while(streamsContainer.hasNextEvent()) {
-//            Stock s = (Stock) streamsContainer.getNextEvent();
-//            System.out.println(s);
-//            runtime.sendEvent(s);
-            runtime.sendEvent(streamsContainer.getNextEvent());
+            Stock s = (Stock) streamsContainer.getNextEvent();
+            logger.debug(s.toString());
+            runtime.sendEvent(s);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException e) {
                 logger.warn("Interrupted when was processing event streams", e);
             }
-//            System.out.println("RESULT: " + stockAlertResults.getNumOfResults());
         }
+        logger.info("Number of StockAlert: " + stockAlertResults.getNumOfResults());
+        logger.info("Number of AlertCausality: " + alertCausalityResults.getNumOfResults());
     }
 
     public ListenerResults getStockAlertResults() {
