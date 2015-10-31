@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cz.muni.fi</groupId>
-  <artifactId>esper-stock-demo</artifactId>
+  <artifactId>esper-stock</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>esper-stock-demo</name>
+  <name>esper-stock</name>
   <url>http://maven.apache.org</url>
 
   <build>

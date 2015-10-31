@@ -52,8 +52,12 @@ public final class EventStreamGenerator {
                 + ", changeIndex: " + changeIndex + ".");
 
         List<Object> eventStream = new LinkedList<>();
+        double range = MAX_PRICE - MIN_PRICE;
+        if (changeIndex > range/2) {
+            changeIndex = (int) Math.round(range/2);
+        }
         // Initial price
-        double price = MIN_PRICE + (MAX_PRICE - MIN_PRICE) * random.nextDouble();
+        double price = MIN_PRICE + range * random.nextDouble();
         // Initial price change value
         double priceChange = random.nextDouble() * changeIndex;
         // If is price change positive or negative
