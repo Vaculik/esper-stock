@@ -37,7 +37,7 @@ public class EsperStockDemo
             // Start monitor with default delay
             monitor.start();
         }
-        monitor.closeServiceProvider();
+        monitor.destroyServiceProvider();
     }
 
     private static boolean parseArgs(String[] args) {

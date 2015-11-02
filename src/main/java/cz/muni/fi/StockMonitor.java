@@ -72,7 +72,7 @@ public class StockMonitor {
         return alertCausalityResults;
     }
 
-    public void closeServiceProvider() {
+    public void destroyServiceProvider() {
         serviceProvider.destroy();
     }
  }

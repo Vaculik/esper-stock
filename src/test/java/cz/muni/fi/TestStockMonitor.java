@@ -25,7 +25,7 @@ public class TestStockMonitor {
 
     @After
     public void close() {
-        monitor.closeServiceProvider();
+        monitor.destroyServiceProvider();
     }
 
     @Test
