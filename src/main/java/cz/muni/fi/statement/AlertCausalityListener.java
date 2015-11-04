@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 public class AlertCausalityListener implements UpdateListener {
 
     private static final Logger logger = LoggerFactory.getLogger(AlertCausalityListener.class);
-    private ListenerResults results;
+    private ResultsListener results;
 
-    public AlertCausalityListener(ListenerResults results) {
+    public AlertCausalityListener(ResultsListener results) {
         this.results = results;
     }
 

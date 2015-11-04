@@ -17,8 +17,8 @@ public class StockMonitor {
     private static final long DEFAULT_DELAY = 100L;
     private StreamsContainer streamsContainer = new StreamsContainer();
     private EPServiceProvider serviceProvider;
-    private final ListenerResults stockAlertResults;
-    private final ListenerResults alertCausalityResults;
+    private final ResultsListener stockAlertResults;
+    private final ResultsListener alertCausalityResults;
 
 
     public StockMonitor() {
@@ -28,12 +28,12 @@ public class StockMonitor {
 
         logger.debug("Create StockAlertStatement and add appropriate listeners.");
         StockAlertStatement stockAlertStatement = new StockAlertStatement(serviceProvider);
-        stockAlertResults = new ListenerResults();
+        stockAlertResults = new ResultsListener();
         stockAlertStatement.addListener(new StockAlertListener(stockAlertResults));
 
         logger.debug("Create AlertCausalityStatement and add appropriate listeners.");
         AlertCausalityStatement alertCausalityStatement = new AlertCausalityStatement(serviceProvider);
-        alertCausalityResults = new ListenerResults();
+        alertCausalityResults = new ResultsListener();
         alertCausalityStatement.addListener(new AlertCausalityListener(alertCausalityResults));
     }
 
@@ -64,11 +64,11 @@ public class StockMonitor {
         logger.info("Number of AlertCausality: " + alertCausalityResults.getNumOfResults());
     }
 
-    public ListenerResults getStockAlertResults() {
+    public ResultsListener getStockAlertResults() {
         return stockAlertResults;
     }
 
-    public ListenerResults getAlertCausalityResults() {
+    public ResultsListener getAlertCausalityResults() {
         return alertCausalityResults;
     }
 

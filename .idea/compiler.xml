@@ -24,8 +24,16 @@
         <processorPath useClasspath="true" />
         <module name="EsperStockDemo" />
       </profile>
+      <profile default="false" name="Annotation profile for EsperStock" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="EsperStock" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
+      <module name="EsperStock" target="1.7" />
       <module name="EsperStockDemo" target="1.7" />
     </bytecodeTargetLevel>
   </component>

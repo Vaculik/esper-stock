@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
  */
 public class StockAlertListener implements UpdateListener {
 
-    private ListenerResults results;
+    private ResultsListener results;
     private static final Logger logger = LoggerFactory.getLogger(StockAlertListener.class);
 
-    public StockAlertListener(ListenerResults results) {
+    public StockAlertListener(ResultsListener results) {
         this.results = results;
     }
 

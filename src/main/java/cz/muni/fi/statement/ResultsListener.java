@@ -10,9 +10,9 @@ import java.util.Set;
 /**
  * Created by vaculik on 24.10.15.
  */
-public class ListenerResults {
+public class ResultsListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(ListenerResults.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResultsListener.class);
     private Set<Object> results = new HashSet<>();
 
     public void addResult(Object r) {

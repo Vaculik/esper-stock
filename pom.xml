@@ -33,7 +33,7 @@
           </execution>
         </executions>
         <configuration>
-	  <mainClass>cz.muni.fi.EsperStockDemo</mainClass>
+	  <mainClass>cz.muni.fi.EsperStock</mainClass>
           </configuration>
       </plugin>
     <plugin>
@@ -45,7 +45,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>cz.muni.fi.EsperStockDemo</mainClass>
+            <mainClass>cz.muni.fi.EsperStock</mainClass>
           </manifest>
         </archive>
       </configuration>

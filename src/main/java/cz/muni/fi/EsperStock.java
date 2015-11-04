@@ -7,7 +7,7 @@ import java.util.List;
  *
  *
  */
-public class EsperStockDemo
+public class EsperStock
 {
     private static int numOfStocks = 100;
     private static int changeIndex = 20;
@@ -89,12 +89,12 @@ public class EsperStockDemo
 
 
     private static String getHelp() {
-        String help = "EsperStockDemo [-n] [value1 value2]\n\n";
+        String help = "EsperStock [-n] [value1 value2]\n\n";
         help += "Options:\n";
         help += "\t-n, --no-delay\tprocess events with no delay\n";
         help += "\tvalue1\t\t\tnumber of events, positive integer value\n";
         help += "\tvalue2\t\t\tstock price change index, positive integer value\n\n";
-        help += "No arguments is equivalent to EsperStockDemo 100 20\n";
+        help += "No arguments is equivalent to EsperStock 100 20\n";
         return help;
     }
 }
