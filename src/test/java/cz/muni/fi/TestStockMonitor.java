@@ -36,6 +36,11 @@ public class TestStockMonitor {
         assertEquals(0, monitor.getStockAlertResults().getNumOfResults());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void illegalDelayParameter() {
+        monitor.start(-1);
+    }
+
     @Test
     public void stockOutsideUpperLimit() {
         List<Object> stream = createDefaultStream("A");

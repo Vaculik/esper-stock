@@ -47,6 +47,12 @@ public class StockMonitor {
     }
 
     public void start(long delay) {
+        if (delay < 0) {
+            String msg = "Parameter delay cannot be negative.";
+            logger.warn(msg);
+            throw new IllegalArgumentException(msg);
+        }
+
         logger.debug("Get EPRuntime and start processing.");
         EPRuntime runtime = serviceProvider.getEPRuntime();
 
