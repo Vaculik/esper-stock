@@ -22,9 +22,7 @@ public class StockMonitor {
 
 
     public StockMonitor() {
-        Configuration config = new Configuration();
-        config.addEventType("Stock", Stock.class);
-        serviceProvider = EPServiceProviderManager.getProvider(StockMonitor.class.getName(), config);
+        serviceProvider = EPServiceProviderManager.getProvider(StockMonitor.class.getName());
 
         logger.debug("Create StockAlertStatement and add appropriate listeners.");
         StockAlertStatement stockAlertStatement = new StockAlertStatement(serviceProvider);
